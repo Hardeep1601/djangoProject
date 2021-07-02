@@ -15,6 +15,8 @@ claim's status is under " In Progress ".
 
 ● If the claim status is " Accepted ", I cannot modify or delete the claim.
 
+
+
 As a claim agent:
 
 ● I can login to Django admin to view the claims submitted by the users.
