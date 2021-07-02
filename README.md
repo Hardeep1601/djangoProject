@@ -15,7 +15,7 @@ claim's status is under " In Progress ".
 
 ● If the claim status is " Accepted ", I cannot modify or delete the claim.
 
-
+----------------------------------------------------------------------------------------------------------------
 
 As a claim agent:
 
