@@ -2,7 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Form
+from .models import Form, UserAccount
+
 
 class formClaims(admin.ModelAdmin):
     list_display = (
@@ -23,4 +24,11 @@ class formClaims(admin.ModelAdmin):
     )
 
 
+class UserInfo(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'email'
+    )
+
 admin.site.register(Form, formClaims)
+admin.site.register(UserAccount, UserInfo)
