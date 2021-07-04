@@ -16,7 +16,7 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, 'Registration successful.')
-            return redirect("register")
+            return redirect("dashboard")
         else:
             messages.error(request, 'Unsuccessful registration. Invalid information.')
     form = NewUserForm
@@ -43,6 +43,8 @@ def login_request(request):
                 messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
+    if request.user.is_authenticated:
+        redirect('dashboard')
     form = AuthenticationForm()
     return render(request=request, template_name="myapp/login.html", context={"login_form": form})
 
@@ -59,8 +61,17 @@ from .models import Form
 
 @login_required(login_url='login')
 def homepage(request):
-    return render(request, 'myapp/dashboard.html')
+    f = Form.objects.filter(id=request.user).exists()
+    return render(request, 'myapp/dashboard.html', {'form': Form.objects.get(id=request.user) if f else 'NULL'})
 
+
+@login_required(login_url='/login')
+def delete_request(request):
+    f = Form.objects.filter(id=request.user).exists()
+    if f:
+        Form.objects.get(id=request.user).delete()
+        # redirect('dashboard')
+    return redirect('dashboard')
 
 
 
@@ -69,16 +80,15 @@ def claims(request):
     if request.method == 'POST':
         form = ClaimUser(data=request.POST, files=request.FILES)
         if form.is_valid():
-            form.save()
+            f = form.save()
+            newx = Form.objects.get(vehicle_num=f.vehicle_num)
+            newx.id = request.user
+            newx.status = 'In Progress'
+            newx.save()
             print("SUCCESS")
-        form = Form.objects.get()
-    return render(request, 'myapp/form.html', {'form': ClaimUser()})
+            redirect('dashboard')
+
+    form = ClaimUser(instance=Form.objects.get(id=request.user)) if Form.objects.filter(id=request.user).exists() else ClaimUser()
+    return render(request, 'myapp/form.html', {'form': form})
 
 
-# @login_required(login_url='/login')
-def EDitClaimForm(request, vechile_num):
-    if Form.objects.filter(vehicle_num=vechile_num).exists():
-        form = ClaimUser(instance=Form.objects.get(vehicle_num=vechile_num))
-        return render(request, 'myapp/form.html', {'form': form})
-    else:
-        redirect('claim')

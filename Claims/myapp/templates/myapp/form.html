@@ -9,6 +9,7 @@
 </head>
 <body style="padding: 20px;">
   <h2>Claims Application for Motor Insurance</h2>
+  <p class=""><a href="/dashboard">Return to dashboard</a></p>
   <br>
   <form action="{% url 'claim' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}

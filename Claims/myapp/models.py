@@ -18,7 +18,8 @@ class UserModel(AbstractUser):
     User_id = models.AutoField(primary_key=True, auto_created=True)
 
 class Form(models.Model):
-    id = models.ForeignKey(UserModel, on_delete=models.CASCADE, default=datetime.datetime.now())
+    status = models.CharField(choices=(('IN_PROGRESS', 'In Progress'), ('ACCEPTED', 'Accepted')), max_length=15, blank=True, null=True)
+    id = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
     contact_num = models.CharField(max_length=50)
@@ -44,6 +45,7 @@ class Form(models.Model):
     # Document required
     photo = models.ImageField(upload_to='UserPics/')
     document = models.FileField(upload_to='UserDocs/')
+
 
     def __str__(self):
         return self.name

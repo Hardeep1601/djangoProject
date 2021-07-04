@@ -5,13 +5,16 @@ from .models import Form, UserModel
 
 
 class NewUserForm(UserCreationForm):
-
     class Meta:
         model = UserModel
         fields = ['username', 'email', 'password1', 'password2']
 
 
 class ClaimUser(forms.ModelForm):
+    # def __init__(self, user_id, *args, **kwargs):
+    #     self.id = user_id
+    #     super(ClaimUser, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Form
         fields = [
@@ -35,11 +38,10 @@ class ClaimUser(forms.ModelForm):
     #     m = super(ClaimUser, self).save(commit=False)
     #     m.id = user
 
+
+
     def save(self, commit=True):
         user = super(ClaimUser, self).save(commit=False)
-        id = self.cleaned_data["id"].split()
-        user.id = id
-        user.email = self.cleaned_data["email"]
         if commit:
             user.save()
         return user

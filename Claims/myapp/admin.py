@@ -8,6 +8,8 @@ from .models import Form, UserModel
 
 class formClaims(admin.ModelAdmin):
     list_display = (
+        'id',
+        'status',
         'name',
         'email',
         'contact_num',
