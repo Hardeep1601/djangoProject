@@ -1,0 +1,23 @@
+<div class="container py-5">
+  <h1>Dashboard</h1>
+    <h2>Welcome {{ request.user.username }}</h2>
+    <h3 class="" style="text-align: left"><a href="/logout">Logout Account</a></h3>
+
+    <br>
+    <h2 class="text-center">Have a claim to make? </h2>
+    <p class=""><a href="/claim">Fill or edit claims form</a>.</p>
+    <p class=""><a href="/delete">Delete claims form</a></p>
+    {% if form != 'NULL' %}
+    <table style="width:50%">
+      <tr>
+        <th>{{form.id}}</th>
+        <th>{{form.vehicle_num}}</th>
+        <th>{{form.status}}</th>
+      </tr>
+
+    <!--  PPt a for loop here to get the number of forms user filled up-->
+   </table>
+{% endif %}
+
+
+</div>
