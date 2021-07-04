@@ -1,3 +1,4 @@
+
 # Claims Application for Motor Insurance
 
 
@@ -25,3 +26,9 @@ As a claim agent:
 admin actions or edit the claim in Django admin.
 
 ● Functionality of claim agent only needed via Django admin.
+
+# Sreeenshots of the User Claim Form
+
+![Screenshot (435)](https://user-images.githubusercontent.com/55220787/124388952-b1171b80-dd17-11eb-988b-febef17c40b0.png)
+![Screenshot (436)](https://user-images.githubusercontent.com/55220787/124388957-b2e0df00-dd17-11eb-8a5a-0f4b321ec284.png)
+![Screenshot (437)](https://user-images.githubusercontent.com/55220787/124388958-b3797580-dd17-11eb-8c83-da15f055bfb7.png)
