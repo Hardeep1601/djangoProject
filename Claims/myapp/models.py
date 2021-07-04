@@ -1,18 +1,24 @@
+import datetime
+
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 # Create your models here.
 
 
-class UserAccount(models.Model):
-    name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
+# class UserAccount(models.Model):
+#     name = models.CharField(max_length=200)
+#     email = models.EmailField(max_length=200)
+#
+#     def __str__(self):
+#         return self.name
 
-    def __str__(self):
-        return self.name
-
+class UserModel(AbstractUser):
+    User_id = models.AutoField(primary_key=True, auto_created=True)
 
 class Form(models.Model):
+    id = models.ForeignKey(UserModel, on_delete=models.CASCADE, default=datetime.datetime.now())
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
     contact_num = models.CharField(max_length=50)

@@ -1,13 +1,13 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django import forms
 
-from .models import Form
+from .models import Form, UserModel
 
 
 class NewUserForm(UserCreationForm):
+
     class Meta:
-        model = User
+        model = UserModel
         fields = ['username', 'email', 'password1', 'password2']
 
 
@@ -30,3 +30,16 @@ class ClaimUser(forms.ModelForm):
             'photo',
             'document'
         ]
+
+    # def save(self, commit=True):
+    #     m = super(ClaimUser, self).save(commit=False)
+    #     m.id = user
+
+    def save(self, commit=True):
+        user = super(ClaimUser, self).save(commit=False)
+        id = self.cleaned_data["id"].split()
+        user.id = id
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user

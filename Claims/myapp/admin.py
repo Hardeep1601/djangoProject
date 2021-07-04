@@ -1,8 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.contrib.auth.admin import UserAdmin
 
-from .models import Form, UserAccount
+from .models import Form, UserModel
 
 
 class formClaims(admin.ModelAdmin):
@@ -24,11 +25,12 @@ class formClaims(admin.ModelAdmin):
     )
 
 
-class UserInfo(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'email'
-    )
+class UserInfo(UserAdmin):
+    fieldsets = UserAdmin.fieldsets
+
+
+
 
 admin.site.register(Form, formClaims)
-admin.site.register(UserAccount, UserInfo)
+# admin.site.unregister(UserModel)
+admin.site.register(UserModel, UserInfo)
